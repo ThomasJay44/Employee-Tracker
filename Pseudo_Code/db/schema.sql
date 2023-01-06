@@ -21,9 +21,9 @@ CREATE TABLE role (
   -- department id set to integer and not null
     department_id INT NOT NULL,
   -- foreign key department id referencing department table on id with on delete constraint
-
+    CONSTRAINT fk_department FOREIGN KEY (department_id) REFERENCES department(id) ON DELETE CASCADE,
   -- optional - index on department id
-
+    INDEX dep_ind (department_id),
 );
 
 CREATE TABLE employee (
@@ -38,7 +38,10 @@ CREATE TABLE employee (
   -- manager id set to integer
     manager_id INT,
   -- foreign key on role id referencing role table on id with on delete constraint
-
+    CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE,
   -- foreign key on manager id referencing employee table on id with on delete constraint
+    CONSTRAINT fk_manager FOREIGN KEY (manager_id) REFERENCES employee(id) ON DELETE SET NULL
   -- optional - indexes on role id, manager id
+    manager_id INT UNSIGNED,
+    INDEX man_ind (manager_id),
 );
