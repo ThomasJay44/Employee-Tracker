@@ -65,37 +65,37 @@ function init() {
   inquirer
       .prompt(menu)
       .then(({ initQuestion }) => {
-          if (initQuestion == "view all departments") {
+          if (initQuestion == "show departments") {
               db.query("SELECT * FROM department", (err, results) => {
                   console.table(results);
                   init();
               });
-          } else if (initQuestion == "view all roles") {
+          } else if (initQuestion == "show roles") {
               db.query("SELECT * FROM role", (err, results) => {
                   console.table(results);
                   init();
               });
-          } else if (initQuestion == "view all employees") {
+          } else if (initQuestion == "show employees") {
               db.query("SELECT * FROM employee JOIN role ON role.id = employee.role_id JOIN department ON department.id = role.department_id", (err, results) => {
                   console.table(results);
                   init();
               });
-          } else if (initQuestion == "add a department") {
+          } else if (initQuestion == "add department") {
               db.query("SELECT * FROM department", (err, results) => {
                   console.table(results);
                   addDepartment();
               });
-          } else if (initQuestion == "add a role") {
+          } else if (initQuestion == "add role") {
               db.query("SELECT * FROM role", (err, results) => {
                   console.table(results);
                   addRole();
               });
-          } else if (initQuestion == "add an employee") {
+          } else if (initQuestion == "add employee") {
               db.query("SELECT * FROM employee", (err, results) => {
                   console.table(results);
                   addEmployee();
               });
-          } else if (initQuestion == "update an employee role") {
+          } else if (initQuestion == "change employee role") {
               db.query("SELECT * FROM employee", (err, results) => {
                   console.table(results);
                   updateEmployee();
@@ -125,24 +125,5 @@ function art() {
 }
 art();
 init();
-
-
-// ========================
-//  OPTIONAL
-// ========================
-
-// fuction - View all employees that belong to a department
-
-// function - View all employees that report to a specific manager
-
-// function - Update an employee's manager
-
-// function - View all departments and show their total utilized department budget
-
-// function - Delete an employee
-
-// function - Delete a department
-
-// function - Delete a role
 
 
