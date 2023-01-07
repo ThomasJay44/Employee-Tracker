@@ -1,12 +1,12 @@
 
-/*
-  REMOVE COMMENTS BEFORE SUBMITTING YOUR HOMEWORK
-*/
-
-// Import inquirer
+const inquirer = require("inquirer");
+const mysql = require("mysql2");
 // Optional: import asciiart-logo
 // import your database module
+const config = require('./package.json');
 const db = require("./db");
+
+const { menu, department, role, employee, update } = require("./questions");
 
 // Import console table for logging information on screen in table format
 require("console.table");
@@ -75,35 +75,26 @@ require("console.table");
 //
 
 // function - Add a new employee
-//  1. prompt for first_name and last_name
-//      in .then callback, store the first namd and the last name to variables,
-//  2. call function to find all roles on database connection to get all existing roles
-//      in .then callback, create array of role objects with id and title from returned array of role data with .map()
-//  3. prompt user for the role for the employee choosing from a list (array) of role objecs
-//      in .then callback, store the role id to a variable,
-//  4. call function to find all employees on database connection
-//      in .then callback, create array of managers with id, first name, last name from the returned data with .map()
-//  5. prompt user for the manager from a list from the array of managers
-//      in .then callback, create an employee object with variables for first name, last name, role id, manager id
-//  6. call function to create employee on database connection, passing the employee object as input argument
-//      in .then callback, call function to load main prompt for questions
+function addEmployee() {
+  inquirer.prompt(employee).then((data) => {
+      // {first_name: data.first_name, last_name: data.last_name, role_id: data.role_id, manager_id: data.manager.id}
+      db.query(`INSERT INTO employee SET ?`, data, (err, results) => {
+          console.log(`${data.first_name} ${data.last_name} is added to the employee list.`);
+          init();
+      });
+  });
+}
 
 // function - Update an employee's role
-//  1. call function to find all employees on database connection
-//      - in .then callback, take first name, last name, and id from the returned database data and create an array
-//        of new employee objects with .map().
-//      - new objects have two properties, name and value
-//        name consists of first name and last name from the returned database data
-//        value has id from the returned database data
-//  2. prompt the list of choices from the new array of employee objects
-//      - in .then callback, store employee id to a variable from the returned user choice
-//  3. call function to find all roles on database connection
-//      - in .then callback, create a new array of new role objects using .map on the returned database role data
-//      - for the new role objects, assign title from returned database data to the name property and assign id to the value property
-//  4. prompt user with the list of choices from the new array of new role objects
-//      - in .then callback, assign returned user choice to a role id variable
-//  5. call function to update employee role, passing employee id variable and role id variable as input arguments
-//  6. call fucntion to load main prompt of questions
+function updateEmployee() {
+  inquirer.prompt(update).then((data) => {
+      db.query(
+          `UPDATE employee SET role = "${data.updateRole}" WHERE employee_id = ${data.updateID};`, (err, results) => {
+              console.log(`employee is updated`);
+              init();
+          });
+  });
+}
 
 
 // function - Exit the application
