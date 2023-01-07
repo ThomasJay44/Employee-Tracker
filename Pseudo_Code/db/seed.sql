@@ -1,7 +1,5 @@
--- USE your_database;
 USE staff_db;
 
--- INSERT INTO your_table_for_departments
 INSERT INTO department (name)
 VALUES 
     ("Front-End"),
@@ -13,7 +11,6 @@ VALUES
     ("Meat"),
     ("Maintenance");
 
--- INSERT INTO your_table_for_roles
 INSERT INTO role (title, salary, department_id)
 VALUES  
     ("Manager", 100000, 1)
@@ -33,7 +30,6 @@ VALUES
     ("Manager", 122000, 8)
     ("Clerk", 44000, 8);
         
--- INSERT INTO your_table_for_employees
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
 VALUES     
     ('Zach', 'Braff', 1, NULL),
