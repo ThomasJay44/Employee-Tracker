@@ -73,7 +73,6 @@ function addDepartment() {
 // functon - Add a role
 function addRole() {
   inquirer.prompt(role).then((data) => {
-      // {title: data.title, salary: data.salary, department_id: data.department_id}
       db.query(`INSERT INTO roles ?`, data, (err, results) => {
           console.log(`${data.title} added to roles`);
           init();
@@ -84,7 +83,6 @@ function addRole() {
 // function - Add a new employee
 function addEmployee() {
   inquirer.prompt(employee).then((data) => {
-      // {first_name: data.first_name, last_name: data.last_name, role_id: data.role_id, manager_id: data.manager.id}
       db.query(`INSERT INTO employees ?`, data, (err, results) => {
           console.log(`${data.first_name} ${data.last_name} added too employees`);
           init();
