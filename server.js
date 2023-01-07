@@ -4,6 +4,7 @@ const mysql = require("mysql2");
 const table = require("console.table");
 
 // Optional: import asciiart-logo
+const logo = require('asciiart-logo');
 // import your database module
 const config = require('./package.json');
 
@@ -17,38 +18,6 @@ const db = mysql.createConnection({
   password: "root",
   database: "employee_db"
 }, console.log(`retrieved employee_db.`));
-
-
-// Call startup function
-
-// function: start up
-//    optional: display logo text using asciiart-logo
-//    call function to the main prompt for questions
-
-
-// function - main prompt for questions
-// - Prompt with the list of choices
-// - In .then callback, check user's response with the switch-case statement.
-//    call the appropriate function depending on what the user chose
-//      - in case of view employees, call the view employees function
-//      - in case of add employee, call the add employee function
-//      - in case of update employee's role, call the update employee role function
-//      - in case of view departments, call the view departments function
-//      - in case of add department, call the add department function
-//      - in case of view roles, call the view roles function
-//      - in case of add role, call the add role function
-//      - in default, call function to quit
-//
-// OPTIONAL:
-//      - in case of update employee's manager, call the update employee manager function
-//      - in case of view employees by manager, call the view employees by manager function
-//      - in case of view employees by department, call the view employees by department function
-//      - in case of view utilized budget by department, call the function to view utilized budget by department
-//      - in case of remove department, call the remove department function
-//      - in case of remove role, call the remove role function
-//      - in case of remve employee, call the remove employee function
-//      - in default, call function to quit
-
 
 // Add a department
 function addDepartment() {
@@ -94,14 +63,10 @@ function updateEmployee() {
 
 function init() {
   inquirer
-      // prompt menu questions
       .prompt(menu)
-      // i destructured data, so data.initQuestion == initQuestion
       .then(({ initQuestion }) => {
-          // according to what the user chooses in the menu, the results come from mysql
           if (initQuestion == "view all departments") {
               db.query("SELECT * FROM department", (err, results) => {
-                  //results are shown as a table
                   console.table(results);
                   init();
               });
@@ -141,6 +106,24 @@ function init() {
       });
 }
 
+function art() {
+  console.log(
+    logo({
+      name: "Company DataBase",
+      font: 'Soft',
+      lineChars: 10,
+      padding: 2,
+      margin: 3,
+      borderColor: 'grey',
+      logoColor: 'grey',
+      textColor: 'grey',
+    })
+    .emptyLine()
+    .right('version 1.0.0')
+    .render()
+  );
+}
+art();
 init();
 
 
