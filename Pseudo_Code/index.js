@@ -60,26 +60,33 @@ require("console.table");
 //
 
 // Add a department
-//  1. prompt user for the name of the department
-//      in .then callback, call create department method on database connection, passing the returned data as input argument
-//  2. call function to load main prompt for questions
-//
+function addDepartment() {
+  inquirer.prompt(department)
+      .then((data) => {
+          db.query(`INSERT INTO department SET ?`, data, (err, results) => {
+              console.log(`${data.name} added to depts.`);
+              init();
+          });
+      });
+}
 
 // functon - Add a role
-//  **prompt for user to enter the role, the salary, and what department the role belongs to
-//  1. call find all departments method on database connection to get array of existing department records
-//      in .then call back, create array of objects with names and ids from returned data with .map() method
-//  2. prompt user for title, salary, and department choosing from the list of departmernts created above
-//      in .then callback, call funcon to create role on database connection, passing returned data from prompt as input argument
-//  3. call function to load main prompt for questions
-//
+function addRole() {
+  inquirer.prompt(role).then((data) => {
+      // {title: data.title, salary: data.salary, department_id: data.department_id}
+      db.query(`INSERT INTO roles ?`, data, (err, results) => {
+          console.log(`${data.title} added to roles`);
+          init();
+      });
+  });
+}
 
 // function - Add a new employee
 function addEmployee() {
   inquirer.prompt(employee).then((data) => {
       // {first_name: data.first_name, last_name: data.last_name, role_id: data.role_id, manager_id: data.manager.id}
-      db.query(`INSERT INTO employee SET ?`, data, (err, results) => {
-          console.log(`${data.first_name} ${data.last_name} is added to the employee list.`);
+      db.query(`INSERT INTO employees ?`, data, (err, results) => {
+          console.log(`${data.first_name} ${data.last_name} added too employees`);
           init();
       });
   });
@@ -90,7 +97,7 @@ function updateEmployee() {
   inquirer.prompt(update).then((data) => {
       db.query(
           `UPDATE employee SET role = "${data.updateRole}" WHERE employee_id = ${data.updateID};`, (err, results) => {
-              console.log(`employee is updated`);
+              console.log(`employee info up to date`);
               init();
           });
   });
