@@ -24,7 +24,7 @@ Command line will promp user for questions for data to be viewed or edited.
 
 video:
 
-Screenshot: https://drive.google.com/file/d/1I6viz3HuYjPN9grB3oKr7MG9kpMPbr0B/view
+Screenshot: https://drive.google.com/file/d/1AnE6EftETWZ-YlG021H-3mzcraPmYaoj/view
 
 ![screenshot](./images/screenshot.JPG)
 
