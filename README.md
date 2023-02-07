@@ -1,5 +1,5 @@
 # Employee-Tracker
-12 SQL: Employee Tracker
+Employee Tracker
 
 ## Description
 
@@ -26,7 +26,7 @@ video:
 
 Screenshot: https://drive.google.com/file/d/1AnE6EftETWZ-YlG021H-3mzcraPmYaoj/view
 
-![screenshot](./images/screenshot.JPG)
+![screenshot](./images/EmployeeDBgif.gif)
 
 ## Credits
 
